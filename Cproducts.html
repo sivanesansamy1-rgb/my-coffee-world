@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - The Coffee World</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Oswald&family=DM+Sans:wght@500;600&family=Syne:wght@800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --text-main: #2c1e16;
+            --text-muted: #666666;
+            --card-bg: #ffffff;
+            --card-hover-bg: #fdf7f1;
+            --accent-light: #f0eae1;
+            --accent-dark: #8b5a2b;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Header Styles --- */
+        .head {
+            background-color: #422406;
+            height: clamp(80px, 9vw, 105px);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(15px, 4vw, 35px);
+            position: relative;
+            z-index: 1000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .head .brand {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            color: #ffffff;
+            font-size: clamp(22px, 4.5vw, 38px);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .head .brand img {
+            height: clamp(55px, 7vw, 85px);
+            width: auto;
+            display: block;
+            margin-right: -45px;
+            margin-top: -8px;
+            transition: height 0.3s ease, margin 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: #e8f400;
+            text-decoration: none;
+            font-size: 20px;
+            text-transform: uppercase;
+            transition: color 0.2s ease-in-out;
+            outline: none;
+        }
+
+        .nav-links a.active {
+            color: #8EC5FF;
+            text-decoration: underline;
+            text-underline-offset: 6px;
+        }
+
+        @media screen and (min-width: 769px) {
+            .nav-links a:hover {
+                color: #8EC5FF;
+                text-decoration: underline;
+                text-underline-offset: 6px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 32px;
+            height: 24px;
+            cursor: pointer;
+            background: transparent !important;
+            border: none !important;
+            padding: 0;
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-appearance: none;
+            appearance: none;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 2px;
+            transition: transform 0.4s ease, opacity 0.3s ease;
+        }
+
+        /* --- Page Content Styles --- */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            min-height: 350px;
+            background-color: #1f140e;
+            background-image: url('https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Coffee_cup_on_wooden_table_202607031205-1.jpeg');
+            background-size: cover;
+            background-position: center 100%;
+            background-repeat: no-repeat;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: 40px;
+            box-sizing: border-box;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .hero-label {
+            color: #FFFFFF;
+            font-size: 3.5rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding-left: 60px;
+            z-index: 2;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 1rem 4rem;
+        }
+
+        .coffee-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .coffee-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .coffee-card:hover,
+        .coffee-card.mobile-hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+            background-color: #F4A460;
+        }
+
+        .coffee-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .coffee-card:hover::after,
+        .coffee-card.mobile-hover::after {
+            animation: shineLeftToRight 0.8s ease-in-out forwards;
+        }
+
+        @keyframes shineLeftToRight {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 200%;
+            }
+        }
+
+        .card-visual {
+            height: 180px;
+            background-color: var(--accent-light);
+            overflow: hidden;
+        }
+
+        .card-visual img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .coffee-card:hover .card-visual img,
+        .coffee-card.mobile-hover .card-visual img {
+            transform: scale(1.08);
+        }
+
+        .card-content {
+            padding: 1.75rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-content h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.75rem;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .card-content p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: var(--accent-light);
+            color: var(--accent-dark);
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* =========================================================
+           FOOTER STYLES
+        ========================================================= */
+        .ms-site-footer {
+            padding: 40px 60px 40px;
+            border-top: 3px solid #111111;
+            position: relative;
+            z-index: 10;
+            background-color: #422406;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .ms-footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-bottom: 0;
+            min-height: 310px;
+            position: relative;
+        }
+
+        .ms-footer-brand {
+            max-width: calc(100% - 650px);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .ms-footer-brand .brand {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            color: #f4f3f1;
+            font-size: clamp(28px, 3vw, 38px);
+            font-weight: bold;
+        }
+
+        .ms-footer-brand .brand img {
+            height: clamp(60px, 7vw, 85px);
+            width: auto;
+            display: block;
+            margin-left: -65px;
+            margin-right: -45px;
+            margin-top: -8px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-heading {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            line-height: 1.05;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        /* --- UPDATED: Adjusted font-size, font-weight, and font-family for uniform presentation --- */
+        .footer-heading .highlight {
+            color: #ffffff !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 17px !important;
+            font-weight: 400 !important;
+            line-height: 1.6 !important;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .ms-footer-center-image {
+            position: absolute;
+            right: 10px;
+            top: -40px;
+            margin: 0;
+            z-index: 5;
+            width: 550px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ms-footer-center-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .ms-footer-links-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding-top: 10px;
+            z-index: 10;
+        }
+
+        .link-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .link-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #CAC9C9;
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+
+        .horizontal-links {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px 40px;
+            align-items: center;
+        }
+
+        .horizontal-links a {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .horizontal-links a:hover {
+            transform: translateY(-4px);
+            color: #2563EB;
+        }
+
+        .horizontal-links a svg {
+            transition: stroke 0.3s ease;
+        }
+
+        .horizontal-links a:hover svg {
+            stroke: #2563EB;
+        }
+
+        .ms-footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 2px solid rgba(17, 17, 17, 0.1);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: #CAC9C9;
+            font-weight: 500;
+        }
+
+        /* --- Page & Footer Responsive Media Queries --- */
+        @media (max-width: 991px) {
+            .ms-site-footer {
+                padding: 50px 40px 30px;
+                overflow: visible;
+            }
+
+            .ms-footer-content {
+                gap: 30px;
+                min-height: auto;
+            }
+
+            .ms-footer-brand {
+                max-width: 100%;
+            }
+
+            .ms-footer-center-image {
+                position: relative !important;
+                right: auto !important;
+                top: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                margin: 20px auto !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+
+            .ms-footer-center-image img {
+                height: auto !important;
+                max-height: 300px !important;
+                margin: 0 auto !important;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-banner {
+                height: 40vh;
+                min-height: 250px;
+                padding-bottom: 25px;
+            }
+
+            .hero-label {
+                font-size: 2.2rem;
+                padding-left: 20px;
+            }
+
+            .coffee-grid {
+                grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+                gap: 1.5rem;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(10.5px) rotate(45deg);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-10.5px) rotate(-45deg);
+            }
+
+            .nav-links {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #422406;
+                flex-direction: column;
+                gap: 0;
+                box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+                max-height: 0;
+                opacity: 0;
+                overflow: hidden;
+                visibility: hidden;
+                transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, visibility 0.4s;
+            }
+
+            .nav-links.nav-open {
+                max-height: 400px;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links a {
+                padding: 18px 20px;
+                width: 100%;
+                text-align: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                font-size: 18px;
+            }
+
+            .ms-site-footer {
+                padding: 40px 25px 25px;
+            }
+
+            .ms-footer-brand .brand {
+                font-size: 24px;
+            }
+
+            .ms-footer-brand .brand img {
+                margin-left: -40px;
+                margin-right: -25px;
+                height: 55px;
+            }
+
+            .ms-footer-brand {
+                order: 1;
+            }
+
+            .ms-footer-links-wrapper {
+                order: 2;
+                flex-direction: column;
+                align-items: center;
+                gap: 35px;
+                margin-bottom: 20px;
+            }
+
+            .link-group {
+                align-items: center;
+            }
+
+            .horizontal-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 14px;
+            }
+
+            .horizontal-links a:hover {
+                transform: translateY(-4px);
+            }
+
+            .ms-footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .ms-footer-center-image {
+                order: 3;
+                position: relative !important;
+                right: auto !important;
+                top: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                margin: 10px auto 0 auto !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+
+            .ms-footer-center-image img {
+                width: auto !important;
+                max-width: 100% !important;
+                height: auto !important;
+                max-height: 220px !important;
+                margin: 0 auto !important;
+                display: block !important;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero-banner {
+                background-position: 85% 100%;
+            }
+
+            .head .brand img {
+                margin-right: -35px;
+            }
+
+            .head {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-label {
+                font-size: 1.8rem;
+            }
+
+            .card-content {
+                padding: 1.25rem;
+            }
+
+            .card-content h2 {
+                font-size: 1.25rem;
+            }
+
+            .card-content p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="head">
+        <div class="brand">
+            <img src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/logo-removebg-preview.png"
+                alt="Coffee World Logo">
+            My Coffee World
+        </div>
+        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="Caboutus.html">About</a>
+            <a href="Cproducts.html" class="active">Products</a>
+            <a href="Cbranches.html">Branches</a>
+            <a href="Ccontactus.html">Contact</a>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-label">Products</div>
+    </section>
+
+    <div class="container">
+        <main class="coffee-grid">
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/espresso.png" alt="Espresso">
+                </div>
+                <div class="card-content">
+                    <h2>Espresso</h2>
+                    <p>A highly concentrated, intensely flavored coffee shot pulled under high pressure. This acts as
+                        the foundation for almost every other drink.</p>
+                    <div class="tags"><span class="tag">Strong</span><span class="tag">Base</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Latte-recipe.jpg"
+                        alt="Caffe Latte"></div>
+                <div class="card-content">
+                    <h2>Caffe Latte</h2>
+                    <p>A smooth, comforting blend of a single or double espresso shot mixed with heavily steamed milk,
+                        topped with a very light layer of microfoam.</p>
+                    <div class="tags"><span class="tag">Creamy</span><span class="tag">Mild</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/cappuccino.jpg"
+                        alt="Cappuccino"></div>
+                <div class="card-content">
+                    <h2>Cappuccino</h2>
+                    <p>Traditionally built in thirds: equal parts espresso, steamed milk, and a thick, airy crown of
+                        milk foam. Offers a highly structured texture.</p>
+                    <div class="tags"><span class="tag">Foamy</span><span class="tag">Balanced</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/flate-white.jpg"
+                        alt="Flat White"></div>
+                <div class="card-content">
+                    <h2>Flat White</h2>
+                    <p>A double ristretto shot blended with velvety, thin microfoam. It provides a much stronger
+                        coffee-to-milk ratio than a traditional latte.</p>
+                    <div class="tags"><span class="tag">Velvety</span><span class="tag">Robust</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Americano.jpg" alt="Americano">
+                </div>
+                <div class="card-content">
+                    <h2>Americano</h2>
+                    <p>A shot of espresso heavily diluted with hot water. It maintains the complex flavor profile of an
+                        espresso but yields a larger, smoother cup.</p>
+                    <div class="tags"><span class="tag">Black</span><span class="tag">Diluted</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Macchiato.webp" alt="Macchiato">
+                </div>
+                <div class="card-content">
+                    <h2>Macchiato</h2>
+                    <p>An espresso shot "stained" with a small dollop of steamed milk or foam on top. It provides a
+                        strong coffee flavor with just a hint of creamy sweetness to cut the acidity.</p>
+                    <div class="tags"><span class="tag">Black</span><span class="tag">stained</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/cold-brew.jpg" alt="Cold Brew">
+                </div>
+                <div class="card-content">
+                    <h2>Cold Brew</h2>
+                    <p>Coarsely ground coffee steeped in cold water for 12 to 24 hours rather than being brewed with
+                        heat. This slow extraction process results in a highly caffeinated, incredibly smooth, and
+                        naturally sweet profile.</p>
+                    <div class="tags"><span class="tag">Black</span><span class="tag">Diluted</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/cortado-coffee.webp"
+                        alt="Cortado"></div>
+                <div class="card-content">
+                    <h2>Cortado</h2>
+                    <p>A highly balanced beverage consisting of equal parts espresso and lightly steamed, warm milk.
+                        This precise 1:1 ratio reduces the coffee's natural acidity while allowing its robust character
+                        to shine through without being masked by foam.</p>
+                    <div class="tags"><span class="tag">Black</span><span class="tag">Balanced</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/romano.avif" alt="Romano"></div>
+                <div class="card-content">
+                    <h2>Romano</h2>
+                    <p>Finishing on a light note, we have an espresso romano. This is a fruity brew traditionally made
+                        using a shot of espresso with a slice or juice of a lemon and a little added sugar to diffuse
+                        the sourness and acidity.</p>
+                    <div class="tags"><span class="tag">Black</span><span class="tag">mild</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/dalgona.webp" alt="Dalgona">
+                </div>
+                <div class="card-content">
+                    <h2>Dalgona</h2>
+                    <p>‘Whipped coffee’ is all the rage on social media, but the creamy drink is actually a take on
+                        Dalgona. The dessert-like brew is made by hand-beating a shot of espresso with granulated sugar
+                        and milk, whipping the mix until soft peaks start to form.</p>
+                    <div class="tags"><span class="tag">Foamy</span><span class="tag">Balanced</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/affogato.jpg" alt="Affogato">
+                </div>
+                <div class="card-content">
+                    <h2>Affogato</h2>
+                    <p>If you’re looking for even more indulgence, affogato provides it in droves. This Italian dessert
+                        combines hot espresso with a scoop of vanilla ice cream, for a decadent, sweet hit of java.</p>
+                    <div class="tags"><span class="tag">sweet</span><span class="tag">mild</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/moach.jpg"
+                        alt="Mocha"></div>
+                <div class="card-content">
+                    <h2>Mocha</h2>
+                    <p>A dessert-like hybrid combining espresso and steamed milk with rich chocolate syrup or cocoa
+                        powder.</p>
+                    <div class="tags"><span class="tag">Sweet</span><span class="tag">Chocolate</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/turkish-1.webp" alt="turkish">
+                </div>
+                <div class="card-content">
+                    <h2>Turkish Coffee</h2>
+                    <p>Turkish coffee is a hot coffee beverage that is made by brewing fine ground coffee in a copper
+                        pot called a “cezve” (pronounced ‘jehz-veh’) on a stovetop.</p>
+                    <div class="tags"><span class="tag">Strong</span><span class="tag">Nutty</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/cuban.webp" alt="Cuban Coffee">
+                </div>
+                <div class="card-content">
+                    <h2>Cuban Coffee</h2>
+                    <p>Cuban coffee, also known as Cafecito and Café Cubano, is a sweetened espresso. It is typically
+                        prepared by brewing finely ground coffee beans in a moka pot and then pouring over a sweet froth
+                        called “espuma”.</p>
+                    <div class="tags"><span class="tag">Sweet</span><span class="tag">Creamy</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/galao.jpg"
+                        alt="Galao Coffee"></div>
+                <div class="card-content">
+                    <h2>Galao Coffee</h2>
+                    <p>Galao coffee is a popular Portuguese coffee drink made with one part espresso and three parts
+                        frothed steamed milk. This hot coffee drink can be enjoyed for breakfast or as an afternoon
+                        energy boost.</p>
+                    <div class="tags"><span class="tag">Medium</span><span class="tag">Creamy</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Freddo.jpg" alt="Freddo"></div>
+                <div class="card-content">
+                    <h2>Freddo</h2>
+                    <p>Next on our coffee tour we’re travelling to Greece, for an icy affair on the sun-soaked islands.
+                        A freddo is a kind of chilled coffee that takes a double shot of espresso and blends it together
+                        with ice cubes, making a strong, thick coffee sure to cool you down on a summer’s day.</p>
+                    <div class="tags"><span class="tag">icy</span><span class="tag">Chocolate</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Ristretto.webp" alt="Ristretto">
+                </div>
+                <div class="card-content">
+                    <h2> Ristretto</h2>
+                    <p>A ristretto is a darker, stronger version of the espresso shot. Your barista will prepare it with
+                        half the amount of water used for standard espresso. Coffee connoisseurs may order this drink
+                        for higher quality, more concentrated, sweeter, and less bitter espresso flavor.</p>
+                    <div class="tags"><span class="tag">Sweet</span><span class="tag">Strong</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/yuenyueng.jpg" alt="Yuanyang">
+                </div>
+                <div class="card-content">
+                    <h2>Yuanyang</h2>
+                    <p>Yuanyang is a Hong Kong hybrid of roughly three parts coffee to seven parts milk tea, served hot
+                        or iced in the city's cha chaan teng diners. Evaporated milk smooths the tea-meets-roast
+                        collision into something silkier than either parent.</p>
+                    <div class="tags"><span class="tag">Iced</span><span class="tag">Chocolate</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Oliang.webp" alt="Oliang"></div>
+                <div class="card-content">
+                    <h2>Oliang </h2>
+                    <p>Oliang is a Thai iced coffee brewed through a cloth sock from beans roasted with corn, soybeans,
+                        and sesame, served black over ice. The grain-and-seed roast gives it a toasty depth plain beans
+                        cannot match</p>
+                    <div class="tags"><span class="tag">Black</span><span class="tag">Chocolate</span></div>
+                </div>
+            </article>
+            <article class="coffee-card">
+                <div class="card-visual"><img
+                        src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Cafezinh-1.jpg" alt="Cafezinho">
+                </div>
+                <div class="card-content">
+                    <h2>Cafezinho</h2>
+                    <p>Cafezinho is a small, strong, pre-sweetened Brazilian coffee, cloth-filtered and offered to every
+                        guest as a matter of course. Expect it sweet by default and gone in three sips</p>
+                    <div class="tags"><span class="tag">Strong</span><span class="tag">Chocolate</span></div>
+                </div>
+            </article>
+        </main>
+    </div>
+
+    <footer class="ms-site-footer">
+        <div class="ms-footer-content">
+
+            <div class="ms-footer-brand">
+                <div class="brand">
+                    <img src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/logo-removebg-preview.png"
+                        alt="Coffee World Logo">
+                    My Coffee World
+                </div>
+                <h2 class="footer-heading">
+                    <span class="highlight">Elevate your coffee moments with a perfect blend of richness, aroma, and
+                        elegance.</span>
+                </h2>
+            </div>
+
+            <div class="ms-footer-links-wrapper">
+                <div class="link-group">
+                    <span class="link-title">Navigation</span>
+                    <div class="horizontal-links">
+                        <a href="index.html">Home</a>
+                        <a href="Caboutus.html">About</a>
+                        <a href="Cproducts.html">Products</a>
+                        <a href="Cbranches.html">Branches</a>
+                        <a href="Ccontactus.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="link-group">
+                    <span class="link-title">Socials</span>
+                    <div class="horizontal-links socials-links">
+                        <a href="https://www.instagram.com/sivanesan_2k5?igsh=MTF2ZmVuMGF3d2tmcA==" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#FF0099" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            Instagram
+                        </a>
+                        <a href="https://www.facebook.com/share/1J9XR98Jf7/" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.81l.39-4h-4.2V7a1 1 0 0 1 1-1h3z">
+                                </path>
+                            </svg>
+                            Facebook
+                        </a>
+                        <a href="https://wa.me/919042463701" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                </path>
+                            </svg>
+                            WhatsApp
+                        </a>
+                        <a href="mailto:sivanesansamy1@gmail.com" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFFF33" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            G-Mail
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ms-footer-center-image">
+                <img src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/c11.jpg" alt="My Coffee Cup">
+            </div>
+
+        </div>
+
+        <div class="ms-footer-bottom">
+            <p>&copy; 2026 SivanesanAK. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Mobile Menu
+            const mobileMenuBtn = document.getElementById('mobile-menu');
+            const navLinksContainer = document.getElementById('nav-links');
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinksContainer.classList.toggle('nav-open');
+                mobileMenuBtn.classList.toggle('active');
+            });
+
+            // Touch Hover Observer
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            if (isTouchDevice) {
+                const observerOptions = { root: null, rootMargin: '0px', threshold: 0.6 };
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('mobile-hover');
+                        } else {
+                            entry.target.classList.remove('mobile-hover');
+                        }
+                    });
+                }, observerOptions);
+                const animatedElements = document.querySelectorAll('.coffee-card');
+                animatedElements.forEach(el => observer.observe(el));
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Locations | Lumina Coffee Roasters</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Oswald&family=DM+Sans:wght@500;600&family=Syne:wght@800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-color: #FAFAF8;
+            --text-main: #2C1E16;
+            --text-light: #5A4A42;
+            --accent-color: #A67B5B;
+            --white: #FFFFFF;
+            --border-color: #E6E2DD;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent !important;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* --- Header Styles --- */
+        .head {
+            background-color: #422406;
+            height: clamp(80px, 9vw, 105px);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 clamp(15px, 4vw, 35px);
+            position: relative;
+            z-index: 1000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .head .brand {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            color: #ffffff;
+            font-size: clamp(22px, 4.5vw, 38px);
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .head .brand img {
+            height: clamp(55px, 7vw, 85px);
+            width: auto;
+            display: block;
+            margin-right: -45px;
+            margin-top: -8px;
+            transition: height 0.3s ease, margin 0.3s ease;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            color: #e8f400;
+            text-decoration: none;
+            font-size: 20px;
+            text-transform: uppercase;
+            transition: color 0.2s ease-in-out;
+            outline: none;
+        }
+
+        .nav-links a.active {
+            color: #8EC5FF;
+            text-decoration: underline;
+            text-underline-offset: 6px;
+        }
+
+        @media screen and (min-width: 769px) {
+            .nav-links a:hover {
+                color: #8EC5FF;
+                text-decoration: underline;
+                text-underline-offset: 6px;
+            }
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 32px;
+            height: 24px;
+            cursor: pointer;
+            background: transparent !important;
+            border: none !important;
+            padding: 0;
+            outline: none !important;
+            box-shadow: none !important;
+            -webkit-appearance: none;
+            appearance: none;
+            z-index: 1001;
+        }
+
+        .menu-toggle span {
+            display: block;
+            height: 3px;
+            width: 100%;
+            background-color: #ffffff;
+            border-radius: 2px;
+            transition: transform 0.4s ease, opacity 0.3s ease;
+        }
+
+        /* --- Page Content Styles --- */
+        .hero-banner {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            min-height: 350px;
+            background-color: var(--text-main);
+            background-image: url('https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Coffee_cup_on_wooden_table_202607031205-1.jpeg');
+            background-size: cover;
+            background-position: center 100%;
+            background-repeat: no-repeat;
+            margin-bottom: clamp(15px, 3vw, 30px);
+            display: flex;
+            align-items: flex-end;
+            padding-bottom: clamp(20px, 5vw, 40px);
+            box-sizing: border-box;
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+            z-index: 1;
+        }
+
+        .hero-label {
+            color: #FFFFFF;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding-left: clamp(20px, 5vw, 60px);
+            z-index: 2;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 0 clamp(1rem, 5vw, 2rem);
+            margin-bottom: 4rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--text-main);
+            color: var(--white);
+            padding: 0.8rem 1.8rem;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            text-align: center;
+            text-decoration: underline !important;
+        }
+
+        .btn:hover {
+            background-color: #ffffff;
+            color: var(--text-main);
+            border: 1px solid var(--text-main);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            color: var(--text-main);
+            border: 1px solid var(--text-main);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text-main);
+            color: var(--white);
+        }
+
+        .branch-actions {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            transform: translateX(-150px);
+        }
+
+        .branches-section {
+            display: flex;
+            flex-direction: column;
+            gap: clamp(4rem, 8vw, 6rem);
+            margin-top: clamp(1rem, 3vw, 2rem);
+        }
+
+        .branch-card {
+            display: flex;
+            align-items: center;
+            gap: clamp(2rem, 5vw, 4rem);
+            background-color: var(--bg-color);
+            transition: transform 0.3s ease;
+        }
+
+        .branch-card:hover,
+        .branch-card.mobile-hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .branch-card:nth-child(odd) {
+            flex-direction: row-reverse;
+        }
+
+        .branch-image {
+            flex: 1 1 50%;
+            width: 100%;
+            border-radius: 12px;
+            padding: 0.5rem;
+            background-color: var(--white);
+            box-shadow: 0 20px 40px rgba(44, 30, 22, 0.08);
+            aspect-ratio: 4 / 3;
+            display: flex;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .branch-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: skewX(-25deg);
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .branch-card:hover .branch-image::after,
+        .branch-card.mobile-hover .branch-image::after {
+            animation: shineLeftToRight 0.8s ease-in-out forwards;
+        }
+
+        /* --- ADDED: Missing Keyframes for the hover animation to work --- */
+        @keyframes shineLeftToRight { 
+            0% { left: -100%; } 
+            100% { left: 200%; } 
+        }
+
+        .branch-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .branch-card:hover .branch-image img,
+        .branch-card.mobile-hover .branch-image img {
+            transform: scale(1.05);
+        }
+
+        .branch-content {
+            flex: 1 1 50%;
+            padding: clamp(1rem, 3vw, 2rem) 0;
+        }
+
+        .branch-content h2 {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .branch-address {
+            color: var(--accent-color);
+            font-weight: 500;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: clamp(1rem, 2vw, 1.1rem);
+        }
+
+        .branch-details {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            margin-bottom: 2rem;
+            max-width: 400px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            font-size: clamp(0.95rem, 2vw, 1rem);
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .detail-value {
+            color: var(--text-light);
+            text-align: right;
+        }
+
+        .branch-features {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+            margin-bottom: 2.5rem;
+        }
+
+        .feature-tag {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            padding: 0.4rem 1rem;
+            border-radius: 30px;
+            color: var(--text-light);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        /* =========================================================
+           FOOTER STYLES
+        ========================================================= */
+        .ms-site-footer {
+            padding: 40px 60px 40px;
+            border-top: 3px solid #111111;
+            position: relative;
+            z-index: 10;
+            background-color: #422406;
+            overflow: hidden;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .ms-footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-bottom: 0;
+            min-height: 310px;
+            position: relative;
+        }
+
+        .ms-footer-brand {
+            max-width: calc(100% - 650px);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .ms-footer-brand .brand {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            color: #f4f3f1;
+            font-size: clamp(28px, 3vw, 38px);
+            font-weight: bold;
+        }
+
+        .ms-footer-brand .brand img {
+            height: clamp(60px, 7vw, 85px);
+            width: auto;
+            display: block;
+            margin-left: -65px;
+            margin-right: -45px;
+            margin-top: -8px;
+            transition: all 0.3s ease;
+        }
+
+        .footer-heading {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            line-height: 1.05;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: -0.02em;
+        }
+
+        .footer-heading .highlight {
+            color: #ffffff !important;
+            font-family: 'Inter', sans-serif !important;
+            font-size: 17px !important;
+            font-weight: 400 !important;
+            line-height: 1.6 !important;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .ms-footer-center-image {
+            position: absolute;
+            right: 10px;
+            top: -40px;
+            margin: 0;
+            z-index: 5;
+            width: 550px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ms-footer-center-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .ms-footer-links-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            padding-top: 10px;
+            z-index: 10;
+        }
+
+        .link-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .link-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 14px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #CAC9C9;
+            margin-bottom: 4px;
+            line-height: 1;
+        }
+
+        .horizontal-links {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px 40px;
+            align-items: center;
+        }
+
+        .horizontal-links a {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .horizontal-links a:hover {
+            transform: translateY(-4px);
+            color: #2563EB;
+        }
+
+        .horizontal-links a svg {
+            transition: stroke 0.3s ease;
+        }
+
+        .horizontal-links a:hover svg {
+            stroke: #2563EB;
+        }
+
+        .ms-footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 20px;
+            border-top: 2px solid rgba(17, 17, 17, 0.1);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 14px;
+            color: #CAC9C9;
+            font-weight: 500;
+        }
+
+        /* --- Page & Footer Responsive Media Queries --- */
+        @media screen and (max-width: 992px) {
+            .ms-site-footer {
+                padding: 50px 40px 30px;
+                overflow: visible;
+            }
+
+            .ms-footer-content {
+                gap: 30px;
+                min-height: auto;
+            }
+
+            .ms-footer-brand {
+                max-width: 100%;
+            }
+
+            .ms-footer-center-image {
+                position: relative !important;
+                right: auto !important;
+                top: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                margin: 20px auto !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+
+            .ms-footer-center-image img {
+                height: auto !important;
+                max-height: 300px !important;
+                margin: 0 auto !important;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .branch-card,
+            .branch-card:nth-child(odd) {
+                flex-direction: column;
+                text-align: left;
+            }
+
+            .branch-image {
+                aspect-ratio: 16 / 9;
+                width: 100%;
+            }
+
+            .branch-content {
+                width: 100%;
+                padding: 0;
+            }
+
+            .branch-details {
+                max-width: 100%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(10.5px) rotate(45deg);
+            }
+
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-10.5px) rotate(-45deg);
+            }
+
+            .nav-links {
+                display: flex;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #422406;
+                flex-direction: column;
+                gap: 0;
+                box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+                max-height: 0;
+                opacity: 0;
+                overflow: hidden;
+                visibility: hidden;
+                transition: max-height 0.4s ease-in-out, opacity 0.3s ease-in-out, visibility 0.4s;
+            }
+
+            .nav-links.nav-open {
+                max-height: 400px;
+                opacity: 1;
+                visibility: visible;
+            }
+
+            .nav-links a {
+                padding: 18px 20px;
+                width: 100%;
+                text-align: center;
+                border-top: 1px solid rgba(255, 255, 255, 0.08);
+                font-size: 18px;
+            }
+
+            .ms-site-footer {
+                padding: 40px 25px 25px;
+            }
+
+            .ms-footer-brand .brand {
+                font-size: 24px;
+            }
+
+            .ms-footer-brand .brand img {
+                margin-left: -40px;
+                margin-right: -25px;
+                height: 55px;
+            }
+
+            .ms-footer-brand {
+                order: 1;
+            }
+
+            .ms-footer-links-wrapper {
+                order: 2;
+                flex-direction: column;
+                align-items: center;
+                gap: 35px;
+                margin-bottom: 20px;
+            }
+
+            .link-group {
+                align-items: center;
+            }
+
+            .horizontal-links {
+                flex-direction: column;
+                align-items: center;
+                gap: 14px;
+            }
+
+            .horizontal-links a:hover {
+                transform: translateY(-4px);
+            }
+
+            .ms-footer-bottom {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .ms-footer-center-image {
+                order: 3;
+                position: relative !important;
+                right: auto !important;
+                top: auto !important;
+                width: 100% !important;
+                height: auto !important;
+                margin: 10px auto 0 auto !important;
+                display: flex !important;
+                justify-content: center !important;
+                align-items: center !important;
+            }
+
+            .ms-footer-center-image img {
+                width: auto !important;
+                max-width: 100% !important;
+                height: auto !important;
+                max-height: 220px !important;
+                margin: 0 auto !important;
+                display: block !important;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .hero-banner {
+                height: 40vh;
+                min-height: 250px;
+                background-position: 85% 100%;
+            }
+
+            .head .brand img {
+                margin-right: -35px;
+            }
+
+            .head {
+                padding: 0 15px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .branch-image {
+                aspect-ratio: 4 / 3;
+            }
+
+            .branch-actions {
+                flex-direction: row;
+                flex-wrap: nowrap;
+                width: 100%;
+                gap: 10px;
+                justify-content: flex-start;
+                transform: translateX(0);
+            }
+
+            .btn {
+                flex: 1;
+                width: auto;
+                padding: 0.8rem 0.5rem;
+                white-space: nowrap;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="head">
+        <div class="brand">
+            <img src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/logo-removebg-preview.png"
+                alt="Coffee World Logo">
+            My Coffee World
+        </div>
+        <button class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation">
+            <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links" id="nav-links">
+            <a href="index.html">Home</a>
+            <a href="Caboutus.html">About</a>
+            <a href="Cproducts.html">Products</a>
+            <a href="Cbranches.html" class="active">Branches</a>
+            <a href="Ccontactus.html">Contact</a>
+        </div>
+    </header>
+
+    <section class="hero-banner">
+        <div class="hero-label">Branches</div>
+    </section>
+
+    <section class="branches-section container">
+
+        <div class="branch-card">
+            <div class="branch-image"><img
+                    src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Coffee_pavilion_with_glass_windows_202607011103.jpeg"
+                    alt="Interior of Cafe Bhawan"></div>
+            <div class="branch-content">
+                <h2>Cafe Bhawan</h2>
+                <div class="branch-address">142 South street, Nagapattinam</div>
+                <div class="branch-features">
+                    <span class="feature-tag">In-house Roasting</span><span class="feature-tag">Free Wi-Fi</span><span
+                        class="feature-tag">Patio</span>
+                </div>
+                <div class="branch-details">
+                    <div class="detail-row"><span class="detail-label">Mon - Fri:</span><span class="detail-value">6:30
+                            AM - 7:00 PM</span></div>
+                    <div class="detail-row"><span class="detail-label">Sat - Sun:</span><span class="detail-value">7:30
+                            AM - 8:00 PM</span></div>
+                </div>
+                <div class="branch-actions">
+                    <a href="https://www.google.com/maps/place/142,+South+St,+Nagore,+Nagapattinam,+Tamil+Nadu+611002/@10.8135587,79.8386918,17z/data=!3m1!4b1!4m5!3m4!1s0x3a55134d5c19a83b:0x96dfdc128159b19f!8m2!3d10.8135587!4d79.8412667?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D"
+                        class="btn">Get Directions</a>
+                    <a href="Ccontactus.html" class="btn btn-outline">Order Ahead</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-card">
+            <div class="branch-image"><img
+                    src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Coffee_roastery_interior_with_ro…_202607011123.jpeg"
+                    alt="Exterior of Lion Cafe"></div>
+            <div class="branch-content">
+                <h2>Lion Cafe</h2>
+                <div class="branch-address">Anna Nagar, Sangliandapuram, Trichy</div>
+                <div class="branch-features">
+                    <span class="feature-tag">Bakery</span><span class="feature-tag">Quiet Zone</span>
+                </div>
+                <div class="branch-details">
+                    <div class="detail-row"><span class="detail-label">Mon - Fri:</span><span class="detail-value">7:00
+                            AM - 6:00 PM</span></div>
+                    <div class="detail-row"><span class="detail-label">Sat - Sun:</span><span class="detail-value">8:00
+                            AM - 5:00 PM</span></div>
+                </div>
+                <div class="branch-actions">
+                    <a href="https://www.google.com/maps/place/Anna+Nagar,+Tennur,+Tiruchirappalli,+Tamil+Nadu/@10.8139317,78.680799,16z/data=!3m1!4b1!4m10!1m2!2m1!1sAnna+Nagar,+Sangliandapuram,+Trichy!3m6!1s0x3baaf50909849bdd:0xa50464337ac25060!8m2!3d10.8153977!4d78.686673!15sCiNBbm5hIE5hZ2FyLCBTYW5nbGlhbmRhcHVyYW0sIFRyaWNoeZIBDHN1YmxvY2FsaXR5MuABAA!16s%2Fg%2F1ym_k2r4d?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D"
+                        class="btn">Get Directions</a>
+                    <a href="Ccontactus.html" class="btn btn-outline">Order Ahead</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-card">
+            <div class="branch-image"><img
+                    src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Greenhouse_coffee_shop_interior_202607011131.jpeg"
+                    alt="Barista working at Green World Cafe"></div>
+            <div class="branch-content">
+                <h2>Green World Cafe</h2>
+                <div class="branch-address">Tambaram, Chennai</div>
+                <div class="branch-features">
+                    <span class="feature-tag">Express Service</span><span class="feature-tag">Grab & Go</span>
+                </div>
+                <div class="branch-details">
+                    <div class="detail-row"><span class="detail-label">Mon - Fri:</span><span class="detail-value">5:30
+                            AM - 8:00 PM</span></div>
+                    <div class="detail-row"><span class="detail-label">Sat - Sun:</span><span class="detail-value">6:00
+                            AM - 6:00 PM</span></div>
+                </div>
+                <div class="branch-actions">
+                    <a href="https://www.google.com/maps/place/Tambaram+Sanatorium,+Tamil+Nadu+600047/@12.9450285,80.1265986,17z/data=!3m1!4b1!4m6!3m5!1s0x3a525fa5d80b5f91:0xc07a008e037b43ff!8m2!3d12.9451497!4d80.129599!16zL20vMGJiOXl4?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D"
+                        class="btn">Get Directions</a>
+                    <a href="Ccontactus.html" class="btn btn-outline">Order Ahead</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-card">
+            <div class="branch-image"><img
+                    src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Modern_loft_coffee_shop_interior_202607011134.jpeg"
+                    alt="Coffee shop near the water"></div>
+            <div class="branch-content">
+                <h2>The Chocolate Room Cafe</h2>
+                <div class="branch-address">Sathya Moorthy Nagar, Bypass Road, Madurai.</div>
+                <div class="branch-features">
+                    <span class="feature-tag">Outdoor Seating</span><span class="feature-tag">Pet Friendly</span><span
+                        class="feature-tag">Pour Over Bar</span>
+                </div>
+                <div class="branch-details">
+                    <div class="detail-row"><span class="detail-label">Mon - Sun:</span><span class="detail-value">6:00
+                            AM - 9:00 PM</span></div>
+                </div>
+                <div class="branch-actions">
+                    <a href="https://www.google.com/maps/place/Bypass+Rd,+Madurai,+Tamil+Nadu/@9.9267477,78.0923055,17z/data=!3m1!4b1!4m6!3m5!1s0x3b00cf71e43d90cb:0xd1442a4388df5d04!8m2!3d9.9267477!4d78.0948804!16s%2Fg%2F1vknmt84?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D"
+                        class="btn">Get Directions</a>
+                    <a href="Ccontactus.html" class="btn btn-outline">Order Ahead</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="branch-card">
+            <div class="branch-image"><img
+                    src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/Coffee_shop_atrium_smooth_archit…_202607011144.jpeg"
+                    alt="Modern coffee shop with laptops and study spaces"></div>
+            <div class="branch-content">
+                <h2>Cafe Dori</h2>
+                <div class="branch-address">Chhatarpur, South Delhi</div>
+                <div class="branch-features">
+                    <span class="feature-tag">Study Rooms</span><span class="feature-tag">Silent Zone</span><span
+                        class="feature-tag">Abundant Outlets</span>
+                </div>
+                <div class="branch-details">
+                    <div class="detail-row"><span class="detail-label">Mon - Fri:</span><span class="detail-value">7:00
+                            AM - 10:00 PM</span></div>
+                    <div class="detail-row"><span class="detail-label">Sat - Sun:</span><span class="detail-value">8:00
+                            AM - 9:00 PM</span></div>
+                </div>
+                <div class="branch-actions">
+                    <a href="https://www.google.com/maps/place/The+coffee+Club/@28.5003744,77.1810393,17z/data=!3m1!4b1!4m6!3m5!1s0x390d1f003f8a5e8d:0x8052f4fde512814c!8m2!3d28.5003744!4d77.1836142!16s%2Fg%2F11lmqwxt8n?entry=ttu&g_ep=EgoyMDI2MDYyOS4wIKXMDSoASAFQAw%3D%3D"
+                        class="btn">Get Directions</a>
+                    <a href="Ccontactus.html" class="btn btn-outline">Order Ahead</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="ms-site-footer">
+        <div class="ms-footer-content">
+
+            <div class="ms-footer-brand">
+                <div class="brand">
+                    <img src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/logo-removebg-preview.png"
+                        alt="Coffee World Logo">
+                    My Coffee World
+                </div>
+                <h2 class="footer-heading">
+                    <span class="highlight">Elevate your coffee moments with a perfect blend of richness, aroma, and
+                        elegance.</span>
+                </h2>
+            </div>
+
+            <div class="ms-footer-links-wrapper">
+                <div class="link-group">
+                    <span class="link-title">Navigation</span>
+                    <div class="horizontal-links">
+                        <a href="index.html">Home</a>
+                        <a href="Caboutus.html">About</a>
+                        <a href="Cproducts.html">Products</a>
+                        <a href="Cbranches.html">Branches</a>
+                        <a href="Ccontactus.html">Contact</a>
+                    </div>
+                </div>
+
+                <div class="link-group">
+                    <span class="link-title">Socials</span>
+                    <div class="horizontal-links socials-links">
+                        <a href="https://www.instagram.com/sivanesan_2k5?igsh=MTF2ZmVuMGF3d2tmcA==" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#FF0099" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            Instagram
+                        </a>
+                        <a href="https://www.facebook.com/share/1J9XR98Jf7/" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#1877F2" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3.81l.39-4h-4.2V7a1 1 0 0 1 1-1h3z">
+                                </path>
+                            </svg>
+                            Facebook
+                        </a>
+                        <a href="https://wa.me/919042463701" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                </path>
+                            </svg>
+                            WhatsApp
+                        </a>
+                        <a href="mailto:sivanesansamy1@gmail.com" target="_blank">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="#FFFF33" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z">
+                                </path>
+                                <polyline points="22,6 12,13 2,6"></polyline>
+                            </svg>
+                            G-Mail
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ms-footer-center-image">
+                <img src="https://mycoffeeworld.dpdns.org/wp-content/uploads/2026/07/c11.jpg" alt="My Coffee Cup">
+            </div>
+
+        </div>
+
+        <div class="ms-footer-bottom">
+            <p>© 2026 SivanesanAK. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Mobile Menu
+            const mobileMenuBtn = document.getElementById('mobile-menu');
+            const navLinksContainer = document.getElementById('nav-links');
+            mobileMenuBtn.addEventListener('click', () => {
+                navLinksContainer.classList.toggle('nav-open');
+                mobileMenuBtn.classList.toggle('active');
+            });
+
+            // Touch Hover
+            const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+            if (isTouchDevice) {
+                const observerOptions = { root: null, rootMargin: '0px', threshold: 0.6 };
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('mobile-hover');
+                        } else {
+                            entry.target.classList.remove('mobile-hover');
+                        }
+                    });
+                }, observerOptions);
+                const animatedElements = document.querySelectorAll('.branch-card');
+                animatedElements.forEach(el => observer.observe(el));
+            }
+        });
+    </script>
+</body>
+
+</html>
